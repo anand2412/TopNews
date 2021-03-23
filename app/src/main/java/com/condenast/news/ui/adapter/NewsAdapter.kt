@@ -1,25 +1,23 @@
 package com.condenast.news.ui.adapter
 
-import android.graphics.drawable.Drawable
-import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.RequestOptions
 import com.condenast.news.R
 import com.condenast.news.data.model.Article
 import kotlinx.android.synthetic.main.news_item_layout.view.*
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 class NewsAdapter(private val articles: MutableList<Article>) : RecyclerView.Adapter<NewsAdapter.DataViewHolder>() {
 
+    private var onItemClickListener : ((Article) -> Unit)? = null
+
     class DataViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(article: Article){
+        fun bind(
+            article: Article,
+            onItemClickListener: ((Article) -> Unit)?
+        ){
             itemView.apply {
                 tvTitle.text = article.title
                 tvAuthor.text = article.author
@@ -29,6 +27,7 @@ class NewsAdapter(private val articles: MutableList<Article>) : RecyclerView.Ada
                     .error(R.drawable.ic_error_image)
                     .fallback(R.drawable.ic_noimg)
                     .into(ivArticleImage)
+                setOnClickListener { onItemClickListener?.let { it(article) } }
             }
         }
     }
@@ -41,7 +40,11 @@ class NewsAdapter(private val articles: MutableList<Article>) : RecyclerView.Ada
     }
 
     override fun onBindViewHolder(holder: DataViewHolder, position: Int) {
-       holder.bind(articles[position])
+       holder.bind(articles[position], onItemClickListener)
+    }
+
+    fun setOnClickListener(listener: (Article) -> Unit) {
+        onItemClickListener = listener
     }
 
     fun addNews(articles: List<Article>){

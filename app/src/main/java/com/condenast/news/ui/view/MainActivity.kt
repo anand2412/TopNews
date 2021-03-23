@@ -1,5 +1,6 @@
 package com.condenast.news.ui.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -16,6 +17,10 @@ import com.condenast.news.ui.viewmodel.NewsViewModel
 import com.condenast.news.ui.viewmodel.ViewModelFactory
 import com.condenast.news.util.Status
 import com.condenast.news.R
+import com.condenast.news.util.Constants.EXTRA_CONTENT
+import com.condenast.news.util.Constants.EXTRA_DESCRIPTION
+import com.condenast.news.util.Constants.EXTRA_IMAGEURL
+import com.condenast.news.util.Constants.EXTRA_TITLE
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Response
 
@@ -29,6 +34,19 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setupUI()
         setupObservers()
+        setupClickListener()
+    }
+
+    private fun setupClickListener() {
+        adapter.setOnClickListener {
+            val intent = Intent(this, NewsDisplayActivity::class.java).apply {
+                putExtra(EXTRA_IMAGEURL, it.urlToImage)
+                putExtra(EXTRA_TITLE, it.title)
+                putExtra(EXTRA_DESCRIPTION, it.description)
+                putExtra(EXTRA_CONTENT, it.content)
+            }
+            startActivity(intent)
+        }
     }
 
     private fun setupObservers() {
