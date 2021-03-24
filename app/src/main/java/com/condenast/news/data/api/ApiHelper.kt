@@ -1,7 +1,15 @@
 package com.condenast.news.data.api
 
-class ApiHelper(private val apiService: ApiService) {
+object ApiHelper {
+
+    private val retrofitBuilder = RetrofitBuilder()
 
     suspend fun getTopUSNews(countryCode: String, category: String) =
-        apiService.getTopUSNews(countryCode, category)
+        retrofitBuilder.topNewsApiService.getTopUSNews(countryCode, category)
+
+    suspend fun getLike(url:String) =
+         retrofitBuilder.likeCommentApiService.getLikes(url)
+
+    suspend fun getComment(url:String) =
+        retrofitBuilder.likeCommentApiService.getComments(url)
 }

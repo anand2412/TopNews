@@ -13,11 +13,11 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".ui.view.NewsDisplayActivity"
-            android:parentActivityName=".ui.view.MainActivity"
+            android:parentActivityName=".ui.view.TopNewsListActivity"
             android:label="@string/title_activity_news_display"
             android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity android:name=".ui.view.MainActivity" >
+        <activity android:name=".ui.view.TopNewsListActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

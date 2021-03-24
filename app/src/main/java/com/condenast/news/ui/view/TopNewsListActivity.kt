@@ -3,6 +3,7 @@ package com.condenast.news.ui.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -10,23 +11,20 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.condenast.news.data.api.ApiHelper
-import com.condenast.news.data.api.RetrofitBuilder
 import com.condenast.news.data.model.NewsResponse
 import com.condenast.news.ui.adapter.NewsAdapter
 import com.condenast.news.ui.viewmodel.NewsViewModel
 import com.condenast.news.ui.viewmodel.ViewModelFactory
 import com.condenast.news.util.Status
 import com.condenast.news.R
-import com.condenast.news.util.Constants.EXTRA_CONTENT
-import com.condenast.news.util.Constants.EXTRA_DESCRIPTION
-import com.condenast.news.util.Constants.EXTRA_IMAGEURL
-import com.condenast.news.util.Constants.EXTRA_TITLE
+import com.condenast.news.util.Constants.EXTRA_ARTICLE
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Response
 
-class MainActivity : AppCompatActivity() {
+class TopNewsListActivity : AppCompatActivity() {
 
-    private val viewModel: NewsViewModel by viewModels { ViewModelFactory(ApiHelper(RetrofitBuilder.apiService)) }
+    private val TAG:String = "TopNewsListActivity"
+    private val viewModel: NewsViewModel by viewModels { ViewModelFactory(ApiHelper) }
     private lateinit var adapter: NewsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,10 +38,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupClickListener() {
         adapter.setOnClickListener {
             val intent = Intent(this, NewsDisplayActivity::class.java).apply {
-                putExtra(EXTRA_IMAGEURL, it.urlToImage)
-                putExtra(EXTRA_TITLE, it.title)
-                putExtra(EXTRA_DESCRIPTION, it.description)
-                putExtra(EXTRA_CONTENT, it.content)
+                putExtra(EXTRA_ARTICLE, it)
             }
             startActivity(intent)
         }
@@ -62,7 +57,7 @@ class MainActivity : AppCompatActivity() {
                     Status.ERROR -> {
                         rv_news.visibility = View.VISIBLE
                         progressBar.visibility = View.GONE
-                        Toast.makeText(this@MainActivity, message, Toast.LENGTH_LONG).show()
+                        Log.d(TAG ,"error :$message")
                     }
                     Status.LOADING -> {
                         progressBar.visibility = View.VISIBLE
