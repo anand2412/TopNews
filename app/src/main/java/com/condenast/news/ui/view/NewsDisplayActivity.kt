@@ -1,6 +1,5 @@
 package com.condenast.news.ui.view
 
-import android.content.Intent
 import android.graphics.text.LineBreaker.JUSTIFICATION_MODE_INTER_WORD
 import android.os.Build
 import android.os.Bundle
@@ -15,17 +14,11 @@ import com.condenast.news.data.model.Article
 import com.condenast.news.data.model.CommentResponse
 import com.condenast.news.data.model.LikeResponse
 import com.condenast.news.ui.viewmodel.LikeCommentViewModel
-import com.condenast.news.ui.viewmodel.NewsViewModel
 import com.condenast.news.ui.viewmodel.ViewModelFactory
 import com.condenast.news.util.Constants.EXTRA_ARTICLE
-import com.condenast.news.util.Constants.EXTRA_CONTENT
-import com.condenast.news.util.Constants.EXTRA_DESCRIPTION
-import com.condenast.news.util.Constants.EXTRA_IMAGEURL
-import com.condenast.news.util.Constants.EXTRA_TITLE
 import com.condenast.news.util.Status
 import kotlinx.android.synthetic.main.activity_news_display.*
 import kotlinx.android.synthetic.main.content_news_display.*
-import kotlinx.android.synthetic.main.news_item_layout.view.*
 import retrofit2.Response
 
 class NewsDisplayActivity : AppCompatActivity() {
