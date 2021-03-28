@@ -7,6 +7,7 @@ import com.condenast.news.data.repository.DataRepository
 import com.condenast.news.util.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import retrofit2.Response
 
 class NewsViewModel(private val dataRepository: DataRepository) : ViewModel(){
 

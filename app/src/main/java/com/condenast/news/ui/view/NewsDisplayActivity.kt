@@ -47,7 +47,7 @@ class NewsDisplayActivity : AppCompatActivity() {
             resources.apply {
                 when(status){
                     Status.SUCCESS-> {
-                        var likeResponse = data.let { response -> response as Response<LikeResponse>}
+                        var likeResponse = data.let { it as Response<LikeResponse>}
                         tv_likes.text = likeResponse.body()?.likes.toString()
                     }
                     Status.ERROR ->{
@@ -62,7 +62,7 @@ class NewsDisplayActivity : AppCompatActivity() {
             resources.apply {
                 when(status){
                     Status.SUCCESS->{
-                        var commentResponse = data.let { response -> response as Response<CommentResponse>}
+                        var commentResponse = data.let { it as Response<CommentResponse>}
                         tv_comment.text = commentResponse.body()?.comments.toString()
                     }
                     Status.ERROR->{
