@@ -10,6 +10,7 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface LikeCommentApiService {
+
     @GET("likes/{url}")
     @Headers("Content-Type: application/json")
     suspend fun getLikes(

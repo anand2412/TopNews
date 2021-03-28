@@ -37,6 +37,7 @@ class NewsDisplayActivity : AppCompatActivity() {
         article = intent.getParcelableExtra(EXTRA_ARTICLE)!!
         val url = article.url.toString()
         requestUrl = url.replace("/","-").substring(8)
+        Log.d(TAG ,"requestedUrl: $requestUrl")
         setupUI()
         setUpObserver()
     }
@@ -51,7 +52,7 @@ class NewsDisplayActivity : AppCompatActivity() {
                         tv_likes.text = likeResponse.body()?.likes.toString()
                     }
                     Status.ERROR ->{
-                        Log.d(TAG ,"error :$message")
+                        Log.e(TAG ,"error :$message")
                     }
                 }
             }
@@ -78,6 +79,7 @@ class NewsDisplayActivity : AppCompatActivity() {
         tv_description.text = article.description
         tv_content.text = article.content
 
+        //justify textview
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             tv_content.justificationMode = JUSTIFICATION_MODE_INTER_WORD
         }

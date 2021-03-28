@@ -5,6 +5,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.condenast.news.data.api.ApiHelper
 import com.condenast.news.data.repository.DataRepository
 
+/**
+ * Factory to provide exact view model
+ */
 class ViewModelFactory(private val apiHelper: ApiHelper) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {

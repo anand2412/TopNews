@@ -47,6 +47,10 @@ class NewsAdapter(private val articles: MutableList<Article>) : RecyclerView.Ada
         onItemClickListener = listener
     }
 
+    /**
+     * @param articles
+     * adding news items
+     */
     fun addNews(articles: List<Article>){
         this.articles.apply {
             clear()

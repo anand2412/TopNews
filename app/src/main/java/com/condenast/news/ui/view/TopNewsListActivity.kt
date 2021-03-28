@@ -57,7 +57,7 @@ class TopNewsListActivity : AppCompatActivity() {
                     Status.ERROR -> {
                         rv_news.visibility = View.VISIBLE
                         progressBar.visibility = View.GONE
-                        Log.d(TAG ,"error :$message")
+                        Log.e(TAG ,"error :$message")
                     }
                     Status.LOADING -> {
                         progressBar.visibility = View.VISIBLE

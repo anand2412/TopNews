@@ -5,6 +5,10 @@ import com.condenast.news.data.model.LikeResponse
 import com.condenast.news.data.model.NewsResponse
 import retrofit2.Response
 
+/**
+ * singleton class to
+ * define all api functions
+ */
 object ApiHelper :IApiHelper{
 
     private val retrofitBuilder = RetrofitBuilder()

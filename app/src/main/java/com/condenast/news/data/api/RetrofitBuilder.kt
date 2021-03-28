@@ -15,12 +15,16 @@ class RetrofitBuilder {
 
     private val interceptor = HttpLoggingInterceptor()
     private val builder = OkHttpClient.Builder()
+
+    // add interceptor to add timeout and logging
     init {
         interceptor.level = HttpLoggingInterceptor.Level.BODY
         builder.addInterceptor(interceptor)
             .connectTimeout(30, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
     }
+
+    // retrofit builder for top news list
     private fun getTopNewsRetrofit(): Retrofit {
         builder.addInterceptor { chain -> return@addInterceptor addApiKeyToRequests(chain)}
         return Retrofit.Builder()
@@ -30,6 +34,7 @@ class RetrofitBuilder {
             .build()
     }
 
+    // retrofit builder to get like comment
     private fun getLikeCommentRetrofit(): Retrofit {
         return Retrofit.Builder()
             .baseUrl(LIKE_COMMENT_BASE_URL)
@@ -39,6 +44,7 @@ class RetrofitBuilder {
     }
 
     /**
+     * @param chain
      * To add API_KEY query for every rest call
      */
     private fun addApiKeyToRequests(chain: Interceptor.Chain): Response {
